@@ -6,8 +6,20 @@ angular.module('meanDashboard').controller('AppCtrl',
 
     $scope.loginForm = {}
 
-    $scope.user = {status: "NOT LOGGED IN"}
+    // function currentUser() {
+    //   var test = localStorage.getItem("status")
+    //   console.log(test)
+    //   if (test) {
+    //     $scope.user = {status: "Logged In"}
+    //   } else {
+    //     $scope.user = {status: "Logged Out"}
+    //   }
+    // }
+    // currentUser()
 
+
+
+    // $scope.user = {status: "Not Logged IN"} ? status : {status: "Logged in"}
 
     $scope.login = function () {
 
@@ -22,6 +34,7 @@ angular.module('meanDashboard').controller('AppCtrl',
           $location.path('/profile');
           $scope.disabled = false;
           $scope.loginForm = {};
+          localStorage.setItem("status", true)
         })
         // handle error
         .catch(function () {
@@ -31,9 +44,7 @@ angular.module('meanDashboard').controller('AppCtrl',
           $scope.loginForm = {};
         });
 
-      $scope.user = {
-        status: $scope.loginForm.userName + " is logged in"
-      }
+      // currentUser()
     };
 
     $scope.register = function () {
@@ -61,80 +72,36 @@ angular.module('meanDashboard').controller('AppCtrl',
     };
 
     $scope.logout = function () {
-
-      console.log(AuthService.getUserStatus());
-
       // call logout from service
       AuthService.logout()
         .then(function () {
           $location.path('/');
         });
 
-        $scope.user = {
-          status: "Logged out"
-        }
+
     };
 
 
     $scope.getUsers = function() {
       AuthService.getUsers().then(function(data) {
         console.log(data);
-        console.log("YEssir")
+
       }, function(err) {
         console.log(err);
       })
     }
 
+    var init = function() {
+      var log = AuthService.isLoggedIn();
+      console.log(log)
+      $scope.logged
+      if (log) {
+        $scope.loggedIn = "Logged In"
+      } else {
+        $scope.loggedIn = "Logged Out"
+      }
+    }
+    // init()
+
+
 }]);
-
-
-//
-// angular.module('meanDashboard').controller('logoutController',
-//   ['$scope', '$location', 'AuthService',
-//   function ($scope, $location, AuthService) {
-//
-//     $scope.logout = function () {
-//
-//       console.log(AuthService.getUserStatus());
-//
-//       // call logout from service
-//       AuthService.logout()
-//         .then(function () {
-//           $location.path('/login');
-//         });
-//
-//     };
-//
-// }]);
-//
-// angular.module('meanDashboard').controller('registerController',
-//   ['$scope', '$location', 'AuthService',
-//   function ($scope, $location, AuthService) {
-//
-//     // console.log(AuthService.getUserStatus());
-//
-//     $scope.register = function () {
-//
-//       // initial values
-//       $scope.error = false;
-//       $scope.disabled = true;
-//
-//       // call register from service
-//       AuthService.register($scope.registerForm.username, $scope.registerForm.password)
-//         // handle success
-//         .then(function () {
-//           $location.path('/login');
-//           $scope.disabled = false;
-//           $scope.registerForm = {};
-//         })
-//         // handle error
-//         .catch(function () {
-//           $scope.error = true;
-//           $scope.errorMessage = "Something went wrong!";
-//           $scope.disabled = false;
-//           $scope.registerForm = {};
-//         });
-//
-//     };
-//
-// }]);

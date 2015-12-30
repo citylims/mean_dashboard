@@ -14,7 +14,7 @@ meanDashboard.config(function ($routeProvider) {
     .when('/profile', {
       templateUrl: 'templates/profile.html',
       controller: 'AppCtrl',
-      requireLogin: false
+      requireLogin: true
     })
     .when('/one', {
       template: '<h1>This is page one!</h1>',
@@ -24,16 +24,14 @@ meanDashboard.config(function ($routeProvider) {
       template: '<h1>This is page two!</h1>',
       requireLogin: true
     })
-    .otherwise({redirectTo: '/login'});
+    .otherwise({redirectTo: '/'});
 });
 
 meanDashboard.run(function ($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-
       if(next.requireLogin) {
         if (AuthService.isLoggedIn() === false) {
-          $location.path('/login')
-          console.log("yup")
+          $location.path('/')
           $route.reload();
         }
       }
