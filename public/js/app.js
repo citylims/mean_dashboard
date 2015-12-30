@@ -1,6 +1,6 @@
-var meanDashboard = angular.module('meanDashboard', ['ngRoute']);
+var app = angular.module('meanDashboard', ['ngRoute']);
 
-meanDashboard.config(function ($routeProvider, $locationProvider, $httpProvider) {
+app.config(function ($routeProvider, $locationProvider, $httpProvider) {
 
   var checkLoggedin = function($q, $timeout, $http, $location, $rootScope){
     var deferred = $q.defer();
@@ -39,22 +39,15 @@ meanDashboard.config(function ($routeProvider, $locationProvider, $httpProvider)
   $routeProvider
     .when('/', {
       templateUrl: '/templates/home_login.html',
-
-      // resolve: {
-      //   loggedin: checkLoggedin
-      // }
+      controller: 'MainCtrl',
     })
     .when('/register', {
       templateUrl: 'templates/register.html',
-      controller: 'AppCtrl',
-
-      resolve: {
-        loggedin: checkLoggedin
-      }
+      controller: 'RegisterCtrl',
     })
-    .when('/profile', {
-      templateUrl: 'templates/profile.html',
-      controller: 'AppCtrl',
+    .when('/dashboard', {
+      templateUrl: 'templates/dashboard.html',
+      controller: 'DashboardCtrl',
       resolve: {
         loggedin: checkLoggedin
       }
@@ -74,7 +67,7 @@ meanDashboard.config(function ($routeProvider, $locationProvider, $httpProvider)
     .otherwise({redirectTo: '/'});
 });
 
-meanDashboard.run(function ($rootScope, $location, $route, AuthService) {
+app.run(function ($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
       // if(next.requireLogin) {
       //   if (AuthService.isLoggedIn() === false) {

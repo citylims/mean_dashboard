@@ -16,24 +16,26 @@
 
     <!-- app -->
     <script src="js/app.js"></script>
-    <script src="js/controllers/AppCtrl.js"></script>
+    <script src="js/controllers/MainCtrl.js"></script>
+    <script src="js/controllers/DashboardCtrl.js"></script>
+    <script src="js/controllers/RegisterCtrl.js"></script>
     <script src="js/services/UserService.js"></script>
     <script src="js/appRoutes.js"></script>
 
 </head>
-<body ng-app="meanDashboard" ng-controller="AppCtrl">
-  <div class="container">
-    <!-- global nav -->
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/#/">Home</a>
-            <a class="navbar-brand" href="/#/register">Register</a>
-            <a class="navbar-brand" href="/#/profile">profile</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><p class="navbar-brand" ng-click="getUsers()">Get Users</p></li>
-        </ul>
-    </nav>
+<body ng-app="meanDashboard">
+<div class="container">
+<!--   global nav
+<nav class="navbar navbar-inverse">
+<div class="navbar-header">
+    <a class="navbar-brand" href="/#/">Home</a>
+    <a class="navbar-brand" href="/#/register">Register</a>
+    <a class="navbar-brand" href="/#/profile">profile</a>
+</div>
+    <ul class="nav navbar-nav">
+        <li><p class="navbar-brand" ng-click="getUsers()">Get Users</p></li>
+    </ul>
+</nav> -->
 
 <!--     <nav class="navbar navbar-inverse" ng-if="status">
     <div class="navbar-header">
@@ -43,7 +45,7 @@
         <li><p class="navbar-brand" ng-if="status" ng-click="getUsers()">Get Users</p></li>
         <li><p class="navbar-brand" ng-if="status" ng-click="checkUser()">Check User</p></li>
     </ul -->
-    </nav>
+    <!-- </nav> -->
 
     <div ng-view></div>
 
