@@ -23,6 +23,13 @@ var app = express();
 // require routes
 var routes = require('./routes/api.js');
 
+var auth = function(req, res, next){
+  if (!req.isAuthenticated())
+  	res.send(401);
+  else
+  	next();
+};
+
 // define middleware
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(logger('dev'));
@@ -46,6 +53,10 @@ passport.deserializeUser(User.deserializeUser());
 
 // routes
 app.use('/user/', routes);
+
+app.get('/loggedin', function(req, res) {
+  res.send(req.isAuthenticated() ? req.user : '0');
+});
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
