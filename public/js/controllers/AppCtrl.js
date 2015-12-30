@@ -5,21 +5,15 @@ angular.module('meanDashboard').controller('AppCtrl',
     // console.log(AuthService.getUserStatus());
 
     $scope.loginForm = {}
+    $scope.registerForm = {}
 
-    // function currentUser() {
-    //   var test = localStorage.getItem("status")
-    //   console.log(test)
-    //   if (test) {
-    //     $scope.user = {status: "Logged In"}
-    //   } else {
-    //     $scope.user = {status: "Logged Out"}
-    //   }
-    // }
-    // currentUser()
+    if (AuthService.isLoggedIn() === false) {
+      $scope.status = false
+    } else {
+      $scope.status = true
+    }
 
 
-
-    // $scope.user = {status: "Not Logged IN"} ? status : {status: "Logged in"}
 
     $scope.login = function () {
 
