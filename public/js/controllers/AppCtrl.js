@@ -1,6 +1,6 @@
 angular.module('meanDashboard').controller('AppCtrl',
   ['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService, $http) {
+  function ($scope, $location, AuthService, $http ) {
 
     // console.log(AuthService.getUserStatus());
 
