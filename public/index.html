@@ -27,12 +27,22 @@
     <nav class="navbar navbar-inverse">
         <div class="navbar-header">
             <a class="navbar-brand" href="/#/">Home</a>
-            <a class="navbar-brand" ng-if="status" href="/#/profile">Profile</a>
             <a class="navbar-brand" href="/#/register">Register</a>
         </div>
         <ul class="nav navbar-nav">
             <li><p class="navbar-brand" ng-if="status" ng-click="getUsers()">Get Users</p></li>
+            <li><p class="navbar-brand" ng-if="status" ng-click="checkUser()">Check User</p></li>
             <li><a class="navbar-brand" href="/#/profile">{{status}}</a></li>
+        </ul>
+    </nav>
+
+    <nav class="navbar navbar-inverse" ng-if="status">
+        <div class="navbar-header">
+            <a class="navbar-brand" ng-if="status" href="/#/profile">Profile</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><p class="navbar-brand" ng-if="status" ng-click="getUsers()">Get Users</p></li>
+            <li><p class="navbar-brand" ng-if="status" ng-click="checkUser()">Check User</p></li>
         </ul>
     </nav>
 

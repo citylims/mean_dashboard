@@ -6,14 +6,10 @@ angular.module('meanDashboard').controller('AppCtrl',
 
     $scope.loginForm = {}
     $scope.registerForm = {}
-
-    if (AuthService.isLoggedIn() === false) {
-      $scope.status = false
-    } else {
-      $scope.status = true
-    }
-
-
+    // $scope.user = JSON.parse(localStorage)
+    // console.log(user);
+    $scope.navUser = ""
+    console.log(localStorage)
 
     $scope.login = function () {
 
@@ -23,12 +19,18 @@ angular.module('meanDashboard').controller('AppCtrl',
 
       // call login from service
       AuthService.login($scope.loginForm.userName, $scope.loginForm.password)
+
         // handle success
         .then(function () {
+          var email = $scope.loginForm.userName
           $location.path('/profile');
           $scope.disabled = false;
           $scope.loginForm = {};
-          localStorage.setItem("status", true)
+          var user = {
+            email: email
+          }
+          console.log(user)
+          localStorage.setItem("user", JSON.stringify(user))
         })
         // handle error
         .catch(function () {
@@ -85,16 +87,6 @@ angular.module('meanDashboard').controller('AppCtrl',
       })
     }
 
-    var init = function() {
-      var log = AuthService.isLoggedIn();
-      console.log(log)
-      $scope.logged
-      if (log) {
-        $scope.loggedIn = "Logged In"
-      } else {
-        $scope.loggedIn = "Logged Out"
-      }
-    }
     // init()
 
 
