@@ -6,7 +6,7 @@ angular
   .module('meanDashboard')
   .controller('DashboardCtrl', DashboardCtrl);
 
-  function DashboardCtrl($scope, $location, AuthService, $http) {
+  function DashboardCtrl($scope, $location, AuthService, DashboardService, $http) {
 
     $scope.user = JSON.parse(localStorage.user)
 
@@ -29,13 +29,12 @@ angular
     }
 
     $scope.getSeed = function() {
-      $http.get("/api/seed").success(function(data) {
-        tableQuery(data);
-      }).error(function(err){
+      DashboardService.seed().then(function(res) {
+        tableQuery(res.data)
+      }, function(err) {
         console.log(err)
       })
     }
-
 
     function tableQuery(data) {
       $scope.table.keys = calcTableKeys(data);
