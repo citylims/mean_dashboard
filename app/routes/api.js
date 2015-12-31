@@ -1,12 +1,14 @@
+//user routes
 var express = require('express'),
     router = express.Router(),
     passport = require('passport');
     User = require('../models/user.js');
-    mongoose = require('mongoose')
+    mongoose = require('mongoose');
+    seed = require('../models/seed.json');
 
-
+//passpport
 router.post('/register', function(req, res) {
-  User.signup(new User({ username: req.body.username }), req.body.password, function(err, account) {
+  User.register(new User({ username: req.body.username }), req.body.password, function(err, account) {
     if (err) {
       return res.status(500).json({err: err})
     }
@@ -49,24 +51,11 @@ router.get('/change_password', function(req, res) {
   })
 })
 
-//get list of users
-router.get('/', function(req, res) {
+//Users
+router.get('/list', function(req, res) {
   User.find({}).then(function(users) {
     res.json(users)
   })
 })
-
-// userModel.findByUsername(email).then(function(sanitizedUser){
-//     if (sanitizedUser){
-//         sanitizedUser.setPassword(newPasswordString, function(){
-//             sanitizedUser.save();
-//             return res.status(200).json({msg: 'password reset successful'});
-//         });
-//     } else {
-//         res.status(200).json({status: 0, msg: 'This user does not exist'});
-//     }
-// },function(err){
-//     console.log(err)
-// })
 
 module.exports = router;
