@@ -1,22 +1,32 @@
-app.controller('RegisterCtrl', function ($scope, $location, AuthService, $http ) {
+(function() {
 
-  $scope.registerForm = {}
-  $scope.register = function () {
+'use strict';
 
-    $scope.error = false;
-    $scope.disabled = true;
+angular
+  .module('meanDashboard')
+  .controller('RegisterCtrl', RegisterCtrl);
 
-    AuthService.register($scope.registerForm)
-      .then(function () {
-        $location.path('/login');
-        $scope.disabled = false;
-        $scope.registerForm = {};
-      })
-      .catch(function () {
-        $scope.error = true;
-        $scope.errorMessage = "Something went wrong!";
-        $scope.disabled = false;
-        $scope.registerForm = {};
-      });
-  };
-})
+  function RegisterCtrl($scope, $location, AuthService, $http) {
+    
+    $scope.registerForm = {}
+    $scope.register = function () {
+
+      $scope.error = false;
+      $scope.disabled = true;
+
+      AuthService.register($scope.registerForm)
+        .then(function () {
+          $location.path('/login');
+          $scope.disabled = false;
+          $scope.registerForm = {};
+        })
+        .catch(function () {
+          $scope.error = true;
+          $scope.errorMessage = "Something went wrong!";
+          $scope.disabled = false;
+          $scope.registerForm = {};
+        });
+    };
+
+  };//JukeCtrl
+})();

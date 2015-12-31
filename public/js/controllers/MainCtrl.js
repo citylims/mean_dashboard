@@ -1,77 +1,45 @@
-app.controller('MainCtrl', function ($scope, $location, AuthService, $http ) {
+(function() {
+
+'use strict';
+
+angular
+  .module('meanDashboard')
+  .controller('MainCtrl', MainCtrl);
+
+  function MainCtrl($scope, $location, AuthService, $http) {
 
     $scope.loginForm = {}
     $scope.registerForm = {}
-    // $scope.user = JSON.parse(localStorage)
-    // console.log(user);
     console.log(localStorage)
 
     $scope.$on('refresh-activity', function() {
+      //check auth
     })
 
     $scope.login = function () {
-
-      // initial values
+      //put this in directive
       $scope.error = false;
       $scope.disabled = true;
-      
-
-      // call login from service
+      ///////////////////////
       AuthService.login($scope.loginForm)
-
-        // handle success
         .then(function () {
-          var email = $scope.loginForm.userName
+          var email = $scope.loginForm.username
           $location.path('/dashboard');
           $scope.disabled = false;
           $scope.loginForm = {};
           var user = {
-            email: email
+            email: email,
+            admin: false
           }
           console.log(user)
           localStorage.setItem("user", JSON.stringify(user))
         })
-        // handle error
         .catch(function () {
           $scope.error = true;
-          $scope.errorMessage = "Invalid username and/or password";
           $scope.disabled = false;
           $scope.loginForm = {};
         });
-
-      // currentUser()
     };
 
-    // $scope.register = function () {
-    //
-    //   // initial values
-    //   $scope.error = false;
-    //   $scope.disabled = true;
-    //
-    //   // call register from service
-    //   AuthService.register($scope.registerForm.username, $scope.registerForm.password)
-    //     // handle success
-    //     .then(function () {
-    //       $location.path('/login');
-    //       $scope.disabled = false;
-    //       $scope.registerForm = {};
-    //     })
-    //     // handle error
-    //     .catch(function () {
-    //       $scope.error = true;
-    //       $scope.errorMessage = "Something went wrong!";
-    //       $scope.disabled = false;
-    //       $scope.registerForm = {};
-    //     });
-    //
-    // };
-
-
-
-
-
-
-    // init()
-
-
-});
+  }
+})();
