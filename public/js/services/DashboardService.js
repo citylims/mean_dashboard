@@ -5,9 +5,9 @@
     .module('meanDashboard')
     .factory('DashboardService', DashboardService);
 
-  DashboardService.$inject = ['$q', '$http', '$timeout'];
+  DashboardService.$inject = ['$q', '$http'];
 
-  function DashboardService($q, $http, $timeout) {
+  function DashboardService($q, $http) {
 
     return {
       seed: seed
