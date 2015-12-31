@@ -1,6 +1,5 @@
 // dependencies
 var express = require('express'),
-    logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     expressSession = require('express-session'),
@@ -10,6 +9,7 @@ var express = require('express'),
     passport = require('passport'),
     localStrategy = require('passport-local' ).Strategy;
     morgan = require('morgan')
+    favicon = require('serve-favicon');
 
 //instances
 mongoose.connect('mongodb://localhost/passport_local');
@@ -24,7 +24,6 @@ var auth = function(req, res, next){
 
 // middleware
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -37,6 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
+app.use(favicon('./public/assets/favicon.ico'));
 
 // passport
 passport.use(new localStrategy(User.authenticate()));
