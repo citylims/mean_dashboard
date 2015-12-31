@@ -7,7 +7,7 @@ angular
   .controller('DashboardCtrl', DashboardCtrl);
 
   function DashboardCtrl($scope, $location, AuthService, $http) {
-    
+
     $scope.logout = function () {
       localStorage.removeItem("user")
       AuthService.logout().then(function () {
@@ -23,8 +23,12 @@ angular
       })
     }
 
-    function apiCall() {
-
+    $scope.getSeed = function() {
+      $http.get("/api/seed").success(function(data) {
+        console.log(data)
+      }).error(function(err){
+        console.log(err)
+      })
     }
 
     $scope.sortType     = 'name'; // set the default sort type
