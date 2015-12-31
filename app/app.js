@@ -19,10 +19,7 @@ var app = express();
 var routes = require('./routes/api.js');
 
 var auth = function(req, res, next){
-  if (!req.isAuthenticated())
-  	res.send(401);
-  else
-  	next();
+  res.send(req.isAuthenticated() ? req.user : '0');
 };
 
 // middleware
@@ -55,7 +52,7 @@ app.get('/', function(req, res) {
 app.use('/user/', routes);
 //helpers
 app.get('/loggedin', function(req, res) {
-  res.send(req.isAuthenticated() ? req.user : '0');
+  auth(req, res)
 });
 
 //error handlers
