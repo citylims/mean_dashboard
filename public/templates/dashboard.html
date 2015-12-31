@@ -13,7 +13,6 @@
   <div class="container">
 
     <h1>Yo! Pinch DASH</h1>
-    <p ng-repeat="item in table.fields" style="display:inline;padding:5px;">{{item}}<p>
 
     <div class="alert alert-info" ng-if="searchName != ''">
       <p>Sort Type: {{ sortType }}</p>
@@ -30,7 +29,21 @@
       </div>
     </form>
 
-    <table class="table table-bordered table-striped">
+    <table ng-if="table.keys.length" class="table table-bordered table-striped table-responsive">
+
+      <thead>
+        <td ng-repeat="key in table.keys">
+          <a ng-click="sortType = key; sortReverse = !sortReverse">
+            {{key}}
+            <span ng-show="sortType == key && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == key && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+      <thead>
+
+    </table>
+
+    <table class="table table-bordered table-striped table-responsive">
 
       <thead>
         <tr>
