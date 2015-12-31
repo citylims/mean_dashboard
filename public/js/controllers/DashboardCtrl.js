@@ -8,6 +8,8 @@ angular
 
   function DashboardCtrl($scope, $location, AuthService, $http) {
 
+    $scope.table = {}
+
     $scope.logout = function () {
       localStorage.removeItem("user")
       AuthService.logout().then(function () {
@@ -25,25 +27,38 @@ angular
 
     $scope.getSeed = function() {
       $http.get("/api/seed").success(function(data) {
-        // console.log(data)
-        calcTable(data)
+        tableQuery(data);
       }).error(function(err){
         console.log(err)
       })
     }
-    
-    $scope.table = {}
-    function calcTable(data) {
-      var records = data;
-      $scope.table.fields = [];
-      for (var key in records) {
+
+
+    function tableQuery(data) {
+      $scope.table.keys = calcTableKeys(data);
+      $scope.tableData = data
+    }
+
+    function calcTableKeys(data) {
+      var keys = []
+      for (var key in data) {
         if (key == 1) {
-          console.log($scope.table.fields)
-          return $scope.table
+          return keys
         }
-        for (var field in records[key]) {
-          $scope.table.fields.push(field);
+        for (var field in data[key]) {
+          keys.push(field);
         }
+      }
+    }
+
+    function calcTableValues(data) {
+      var values = []
+      for (var key in data) {
+        for (var obj in data[key]) {
+          var i = 0;
+          values.push(data[key][obj])
+        }
+        return values
       }
     }
 
@@ -57,11 +72,6 @@ angular
       { name: 'Armaan', email: 'armaan@email.com', rating: 7 },
       { name: 'Dae', email: 'dae@email.com', rating: 6 }
     ];
-
-    // $scope.records = JSON.parse($scope.records)
-    // for (var k in $scope.records) {
-    //   console.log(k + $scope.records[k])
-    // }
 
   }
 })()

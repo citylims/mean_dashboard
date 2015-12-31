@@ -13,6 +13,7 @@
   <div class="container">
 
     <h1>Yo! Pinch DASH</h1>
+    <p ng-repeat="item in table.fields" style="display:inline;padding:5px;">{{item}}<p>
 
     <div class="alert alert-info" ng-if="searchName != ''">
       <p>Sort Type: {{ sortType }}</p>
