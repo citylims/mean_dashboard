@@ -11,16 +11,11 @@ var express = require('express'),
     localStrategy = require('passport-local' ).Strategy;
     morgan = require('morgan')
 
-// mongoose
+//instances
 mongoose.connect('mongodb://localhost/passport_local');
 
-// user schema/model
 var User = require('./models/user.js');
-
-// create instance of express
 var app = express();
-
-// require routes
 var routes = require('./routes/api.js');
 
 var auth = function(req, res, next){
@@ -30,7 +25,7 @@ var auth = function(req, res, next){
   	next();
 };
 
-// define middleware
+// middleware
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -46,28 +41,29 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 
-// configure passport
+// passport
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // routes
+//angular app
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
+//api calls
 app.use('/user/', routes);
-
+//helpers
 app.get('/loggedin', function(req, res) {
   res.send(req.isAuthenticated() ? req.user : '0');
 });
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+//error handlers
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
-
-// error hndlers
-// app.use(function(req, res, next) {
-//     var err = new Error('Not Found');
-//     err.status = 404;
-//     next(err);
-// });
 
 app.use(function(err, req, res) {
   res.status(err.status || 500);
@@ -77,4 +73,5 @@ app.use(function(err, req, res) {
   }));
 });
 
+//app
 module.exports = app;
