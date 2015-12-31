@@ -7,7 +7,7 @@ angular
   .controller('RegisterCtrl', RegisterCtrl);
 
   function RegisterCtrl($scope, $location, AuthService, $http) {
-    
+
     $scope.registerForm = {}
     $scope.register = function () {
 
@@ -28,5 +28,6 @@ angular
         });
     };
 
-  };//JukeCtrl
+  };
+
 })();

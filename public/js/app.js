@@ -6,7 +6,7 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
     var deferred = $q.defer();
     //check login
     $http.get('/loggedin').success(function(user){
-      // Authenticated user
+      // auth user
       if (user !== '0') {
         console.log(user)
         deferred.resolve();
@@ -24,7 +24,6 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
   $httpProvider.interceptors.push(function($q, $location) {
       return {
         response: function(response) {
-          // do something on success
           return response;
         },
         responseError: function(response) {
@@ -69,11 +68,11 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
 
 app.run(function ($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
-      // if(next.requireLogin) {
-      //   if (AuthService.isLoggedIn() === false) {
-      //     $location.path('/')
-      //     $route.reload();
-      //   }
-      // }
+      if(next.requireLogin) {
+        if (AuthService.isLoggedIn() === false) {
+          $location.path('/')
+          $route.reload();
+        }
+      }
   });
 });
