@@ -36,7 +36,8 @@ angular
 
     function tableQuery(data) {
       $scope.table.keys = calcTableKeys(data);
-      $scope.tableData = data
+      $scope.table.data = data
+      console.log($scope.table.data)
     }
 
     function calcTableKeys(data) {

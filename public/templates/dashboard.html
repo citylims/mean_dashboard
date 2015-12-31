@@ -41,6 +41,12 @@
         </td>
       <thead>
 
+      <tbody >
+        <tr  ng-repeat="(key,value) in table.data">
+          <td ng-repeat="supported in value track by $index">{{supported}}</td>
+        </tr>
+      </tbody>
+
     </table>
 
     <table class="table table-bordered table-striped table-responsive">
