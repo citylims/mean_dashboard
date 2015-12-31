@@ -8,6 +8,8 @@ angular
 
   function DashboardCtrl($scope, $location, AuthService, $http) {
 
+    $scope.user = JSON.parse(localStorage.user)
+
     $scope.table = {}
     $scope.customTable = false
 

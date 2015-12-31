@@ -6,6 +6,7 @@
         <li><a class="navbar-brand" ng-click='getSeed()'>Seed</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a class="navbar-brand" ng-click=''>{{user.email}}</a></li>
         <li><a class="navbar-brand" ng-click='logout()'>Logout</a></li>
       </ul>
     </div>
@@ -33,21 +34,17 @@
 
       <thead>
         <td ng-repeat="key in table.keys">
-          <a ng-click="sortType = key; sortReverse = !sortReverse">
+          <a>
             {{key}}
-            <span ng-show="sortType == key && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == key && sortReverse" class="fa fa-caret-up"></span>
+
           </a>
         </td>
       <thead>
 
       <tbody >
-        <!-- <div ng-repeat="item in table.data">
-          {{item.description}} -->
-        <tr  ng-repeat="(key,value) in table.data | orderBy:sortType:sortReverse | filter:searchName">
+        <tr ng-repeat="(key,value) in table.data">
             <td ng-repeat="supported in value track by $index ">{{supported}}</td>
           </tr>
-        <!-- </div> -->
       </tbody>
 
 
