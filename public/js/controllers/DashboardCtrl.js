@@ -29,14 +29,13 @@ angular
 
     $scope.sortType     = 'name'; // set the default sort type
     $scope.sortReverse  = false;  // set the default sort order
-    $scope.searchFish   = '';     // set the default search/filter term
+    $scope.searchName   = '';     // set the default search/filter term
 
-    // create the list of sushi rolls
-    $scope.sushi = [
-      { name: 'Austn', fish: 'austin@email.com', tastiness: 2 },
-      { name: 'Philly', fish: 'philly@email.com', tastiness: 4 },
-      { name: 'Armaan', fish: 'armaan@email.com', tastiness: 7 },
-      { name: 'Dae', fish: 'dae@email.com', tastiness: 6 }
+    $scope.records = [
+      { name: 'Austin', email: 'austin@email.com', rating: 2 },
+      { name: 'Philly', email: 'philly@email.com', rating: 4 },
+      { name: 'Armaan', email: 'armaan@email.com', rating: 7 },
+      { name: 'Dae', email: 'dae@email.com', rating: 6 }
     ];
 
   }
