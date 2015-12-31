@@ -1,16 +1,16 @@
-
   <nav class="navbar navbar-inverse">
-      <ul class="nav navbar-nav">
-          <li><p class="navbar-brand" ng-click="getUsers()">Get Users</p></li>
-          <li><a ng-click='logout()' class="avbar-brand">Logout</a></li>
-      </ul>
+    <ul class="nav navbar-nav">
+      <li><a class="navbar-brand" ng-click="getUsers()">Get Users</a></li>
+      <li><a class="navbar-brand" ng-click='logout()'>Logout</a></li>
+    </ul>
   </nav>
 
 
-<h1>Yo! Pinch DASH</h1>
-<div class="alert alert-info">
-    <!-- <p>Sort Type: {{ sortType }}</p>
-    <p>Sort Reverse: {{ sortReverse }}</p> -->
+  <h1>Yo! Pinch DASH</h1>
+
+  <div class="alert alert-info" ng-if="searchName != ''">
+    <p>Sort Type: {{ sortType }}</p>
+    <p>Sort Reverse: {{ sortReverse }}</p>
     <p>Search Query: {{ searchName }}</p>
   </div>
 
@@ -18,7 +18,7 @@
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-        <input type="text" class="form-control" placeholder="filter by name" ng-model="searchName">
+        <input type="text" class="form-control" placeholder="filter by {{sortType}}" ng-model="searchName">
       </div>
     </div>
   </form>
