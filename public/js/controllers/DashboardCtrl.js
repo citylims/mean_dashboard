@@ -9,6 +9,7 @@ angular
   function DashboardCtrl($scope, $location, AuthService, $http) {
 
     $scope.table = {}
+    $scope.customTable = false
 
     $scope.logout = function () {
       localStorage.removeItem("user")
@@ -37,6 +38,7 @@ angular
     function tableQuery(data) {
       $scope.table.keys = calcTableKeys(data);
       $scope.table.data = data
+      $scope.customTable = true
       console.log($scope.table.data)
     }
 
