@@ -49,7 +49,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 //api calls
-app.use('/user/', routes);
+app.use('/api/', routes);
 //helpers
 app.get('/loggedin', function(req, res) {
   auth(req, res)

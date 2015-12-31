@@ -6,6 +6,7 @@ var express = require('express'),
     mongoose = require('mongoose');
     seed = require('../models/seed.json');
 
+
 //passpport
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }), req.body.password, function(err, account) {
@@ -57,5 +58,10 @@ router.get('/list', function(req, res) {
     res.json(users)
   })
 })
+
+router.get('/seed', function(req, res) {
+  res.json(seed)
+})
+
 
 module.exports = router;

@@ -34,7 +34,7 @@
     function login(data) {
       var deferred = $q.defer();
 
-      $http.post('/user/login', data)
+      $http.post('/api/login', data)
         .success(function (data, status) {
           if(status === 200 && data.status){
             user = true;
@@ -55,7 +55,7 @@
     function logout() {
       var deferred = $q.defer();
 
-      $http.get('/user/logout')
+      $http.get('/api/logout')
         .success(function (data) {
           user = false;
           deferred.resolve();
@@ -71,7 +71,7 @@
     function register(data) {
       var deferred = $q.defer();
 
-      $http.post('/user/register', data)
+      $http.post('/api/register', data)
         .success(function (data, status) {
           if(status === 200 && data.status){
             deferred.resolve();
@@ -87,7 +87,7 @@
     }
 
     function getUsers() {
-      return $http.get('/user/list')
+      return $http.get('/api/list')
     }
 
   }
