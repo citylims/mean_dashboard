@@ -25,10 +25,26 @@ angular
 
     $scope.getSeed = function() {
       $http.get("/api/seed").success(function(data) {
-        console.log(data)
+        // console.log(data)
+        calcTable(data)
       }).error(function(err){
         console.log(err)
       })
+    }
+    
+    $scope.table = {}
+    function calcTable(data) {
+      var records = data;
+      $scope.table.fields = [];
+      for (var key in records) {
+        if (key == 1) {
+          console.log($scope.table.fields)
+          return $scope.table
+        }
+        for (var field in records[key]) {
+          $scope.table.fields.push(field);
+        }
+      }
     }
 
     $scope.sortType     = 'name'; // set the default sort type
@@ -41,6 +57,11 @@ angular
       { name: 'Armaan', email: 'armaan@email.com', rating: 7 },
       { name: 'Dae', email: 'dae@email.com', rating: 6 }
     ];
+
+    // $scope.records = JSON.parse($scope.records)
+    // for (var k in $scope.records) {
+    //   console.log(k + $scope.records[k])
+    // }
 
   }
 })()
