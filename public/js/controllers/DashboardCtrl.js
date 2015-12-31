@@ -16,16 +16,20 @@ app.controller('DashboardCtrl', function ($scope, $location, AuthService, $http 
     })
   }
 
+  function apiCall() {
+
+  }
+
   $scope.sortType     = 'name'; // set the default sort type
   $scope.sortReverse  = false;  // set the default sort order
   $scope.searchFish   = '';     // set the default search/filter term
 
   // create the list of sushi rolls
   $scope.sushi = [
-    { name: 'Cali Roll', fish: 'Crab', tastiness: 2 },
-    { name: 'Philly', fish: 'Tuna', tastiness: 4 },
-    { name: 'Tiger', fish: 'Eel', tastiness: 7 },
-    { name: 'Rainbow', fish: 'Variety', tastiness: 6 }
+    { name: 'Austn', fish: 'austin@email.com', tastiness: 2 },
+    { name: 'Philly', fish: 'philly@email.com', tastiness: 4 },
+    { name: 'Armaan', fish: 'armaan@email.com', tastiness: 7 },
+    { name: 'Dae', fish: 'dae@email.com', tastiness: 6 }
   ];
 
 })

@@ -1,19 +1,23 @@
-angular.module('meanDashboard').factory('AuthService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
+(function() {
+  'use strict';
 
-    // create user variable
+  angular
+    .module('meanDashboard')
+    .factory('AuthService', AuthService);
+
+  AuthService.$inject = ['$q', '$http', '$timeout'];
+
+  function AuthService($q, $http, $timeout) {
     var user = null;
 
-    // return available functions for use in controllers
-    return ({
+    return {
       isLoggedIn: isLoggedIn,
       getUserStatus: getUserStatus,
       login: login,
       logout: logout,
       register: register,
       getUsers: getUsers
-    });
+    };
 
     function isLoggedIn() {
       if(user) {
@@ -27,10 +31,10 @@ angular.module('meanDashboard').factory('AuthService',
       return user;
     }
 
-    function login(username, password) {
+    function login(data) {
       var deferred = $q.defer();
-      
-      $http.post('/user/login', {username: username, password: password})
+
+      $http.post('/user/login', data)
         .success(function (data, status) {
           if(status === 200 && data.status){
             user = true;
@@ -64,10 +68,10 @@ angular.module('meanDashboard').factory('AuthService',
       return deferred.promise;
     }
 
-    function register(username, password) {
+    function register(data) {
       var deferred = $q.defer();
 
-      $http.post('/user/register', {username: username, password: password})
+      $http.post('/user/register', data)
         .success(function (data, status) {
           if(status === 200 && data.status){
             deferred.resolve();
@@ -86,5 +90,5 @@ angular.module('meanDashboard').factory('AuthService',
       return $http.get('/user')
     }
 
-
-}]);
+  }
+})();

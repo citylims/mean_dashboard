@@ -14,9 +14,10 @@ app.controller('MainCtrl', function ($scope, $location, AuthService, $http ) {
       // initial values
       $scope.error = false;
       $scope.disabled = true;
+      
 
       // call login from service
-      AuthService.login($scope.loginForm.userName, $scope.loginForm.password)
+      AuthService.login($scope.loginForm)
 
         // handle success
         .then(function () {
@@ -68,7 +69,7 @@ app.controller('MainCtrl', function ($scope, $location, AuthService, $http ) {
 
 
 
-    
+
 
     // init()
 
