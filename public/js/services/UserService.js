@@ -87,7 +87,7 @@
     }
 
     function getUsers() {
-      return $http.get('/user')
+      return $http.get('/user/list')
     }
 
   }
