@@ -33,10 +33,8 @@
 
       <thead>
         <td ng-repeat="key in table.keys">
-          <a ng-click="sortType = key; sortReverse = !sortReverse">
+          <a>
             {{key}}
-            <span ng-show="sortType == key && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == key && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
       <thead>
