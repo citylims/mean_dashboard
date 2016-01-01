@@ -29,8 +29,8 @@
       </div>
     </form>
 
-    <div class=" table-responsive" style="white-space: nowrap;">
-    <table ng-if="table.keys.length" class="table table-bordered table-striped">
+    <div ng-if="table.keys.length" class=" table-responsive" style="white-space: nowrap; border: 1px solid #D5E3E3">
+    <table  class="table table-bordered table-striped">
 
       <thead>
         <td ng-repeat="key in table.keys">
@@ -42,7 +42,7 @@
       <thead>
 
       <tbody >
-        <tr ng-repeat="(key,value) in table.data">
+        <tr ng-repeat="(key,value) in table.data | filter:searchName">
             <td ng-repeat="supported in value track by $index ">{{supported}}</td>
           </tr>
       </tbody>
